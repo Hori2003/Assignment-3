@@ -3,39 +3,33 @@ let numRows = 0;
 let numCols = 0;
 let colorSelected; 
 
-// Add a row
-function addR() {
-    // alert("Clicked Add Row"); // Replace this line with your code.
+
+
+// Remove a row
+function removeR() {
+    // alert("Clicked Remove Row"); // Replace this line with your code.
     let table = document.getElementById("grid");
-    let row = table.insertRow(numRows);
-
-    if (numRows == 0){
-        table.rows[table.rows.length -1].insertCell(0);
-        numCols++;
-    }
-    
-    else{
-    for(var i = 0; i < numCols; i++){
-    table.rows[table.rows.length -1].insertCell(i);
+    if(numRows > 0){
+        table.deleteRow(table.rows.length - 1)
+        numRows--;
+        if (numRows == 0) {
+            numCols = 0;
+        }
     }
 }
-numRows++;
-}
 
-// Add a column
-function addC() {
-    // alert("Clicked Add Col"); // Replace this line with your code.
-        // alert("Clicked Add Row"); // Replace this line with your code.
-        let table = document.getElementById("grid");
-    
-        if (numRows == 0){
-            table.insertRow(numRows);
-            numRows++
+// Remove a column
+function removeC() {
+    // alert("Clicked Remove Col"); // Replace this line with your code.
+    let table = document.getElementById("grid");
+    if(numCols > 0){
+        for(var i = 0; i < table.rows.length; i++){
+            table.rows[i].deleteCell(-1)
         }
-        
-        for(var i = 0; i < numRows; i++){
-        table.rows[i].insertCell(numCols);
+        numCols--;
+        while (numCols == 0) {
+            table.deleteRow(0);
+            numRows--;
         }
-    
-    numCols++;
+    }
 }
